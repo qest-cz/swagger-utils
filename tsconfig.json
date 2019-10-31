@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "declaration": true,
+    "rootDir": "",
+    "sourceMap": true,
+    "removeComments": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "noUnusedLocals": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./scripts/**/*.ts",
+    "./migrations/**/*.ts",
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
+}
