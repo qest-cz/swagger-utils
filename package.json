@@ -9,8 +9,8 @@
     "tslint": "tslint -c tslint.json -p .",
     "build": "rimraf dist && tsc && cp package.json dist/src && cp yarn.lock dist/src"
   },
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [],
   "author": "QEST",
   "repository": {
