@@ -1,6 +1,6 @@
 {
   "name": "@qest/swagger-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "scripts": {
     "prettier:run": "prettier --write \"src/**/*.ts\"",
