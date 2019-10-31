@@ -2,11 +2,10 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "./dist",
-    "declaration": true,
-    "rootDir": "",
+    "outDir": "dist",
     "sourceMap": true,
     "removeComments": true,
+    "declaration": true,
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types"
@@ -15,11 +14,10 @@
     "resolveJsonModule": true
   },
   "include": [
-    "./src/**/*.ts",
-    "./scripts/**/*.ts",
-    "./migrations/**/*.ts",
+    "./src/**/*.ts"
   ],
   "exclude": [
-    "./node_modules"
+    "./node_modules",
+    "dist"
   ]
 }

@@ -7,7 +7,7 @@
     "prettier:check": "prettier -l \"src/**/*.ts\"",
     "tslint:run": "tslint --fix -c tslint.json -p .",
     "tslint": "tslint -c tslint.json -p .",
-    "build": "rimraf dist && tsc && cp package.json dist/src && cp yarn.lock dist/src"
+    "build": "rimraf dist && tsc"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
