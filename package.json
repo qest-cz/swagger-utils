@@ -7,6 +7,9 @@
     "prettier:check": "prettier -l \"src/**/*.ts\"",
     "tslint:run": "tslint --fix -c tslint.json -p .",
     "tslint": "tslint -c tslint.json -p .",
+    "tsc:check": "tsc --noEmit",
+    "code:fix": "yarn prettier:run && yarn tslint:run",
+    "code:check": "yarn prettier:check && yarn tslint && yarn tsc:check",
     "build": "rimraf dist && tsc"
   },
   "main": "dist/index.js",
