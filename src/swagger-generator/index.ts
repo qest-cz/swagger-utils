@@ -30,7 +30,7 @@ export class SwaggerGenerator {
             securityDefinitions: {},
             tags: [],
         };
-        this.includePaths = includePaths;
+        this.includePaths = includePaths ? includePaths : ['./src'];
         this.excludedDirsFromPaths = excludedDirsFromPaths;
     }
 
@@ -44,7 +44,7 @@ export class SwaggerGenerator {
         return this.descriptor;
     }
 
-    getDescriptionText() {
+    private getDescriptionText() {
         const { changeLogPath, descriptorInfo } = this.setting;
         if (changeLogPath) {
             const changeLog = fs.readFileSync(changeLogPath).toString();

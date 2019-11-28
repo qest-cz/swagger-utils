@@ -6,7 +6,7 @@ export interface IDescriptorInfo {
 }
 
 export interface IDescriptor {
-    swagger: string;
+    swagger: '2.0' | '3.0';
     info: IDescriptorInfo;
     paths: Object;
     definitions: Object;
@@ -20,11 +20,11 @@ export interface IDescriptor {
 
 export interface ISwaggerSetting {
     descriptorInfo: IDescriptorInfo;
-    includePaths: string[];
+    includePaths?: string[];
     excludedDirsFromPaths: string[];
     schemes?: string[];
     host?: string;
     basePath?: string;
     changeLogPath?: string;
-    swaggerVersion?: string;
+    swaggerVersion?: '2.0' | '3.0';
 }
