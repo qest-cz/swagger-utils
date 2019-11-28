@@ -6,7 +6,7 @@ export interface IDescriptorInfo {
 }
 
 export interface IDescriptor {
-    swagger: '2.0';
+    swagger: string;
     info: IDescriptorInfo;
     paths: Object;
     definitions: Object;
@@ -26,4 +26,5 @@ export interface ISwaggerSetting {
     host?: string;
     basePath?: string;
     changeLogPath?: string;
+    swaggerVersion?: string;
 }

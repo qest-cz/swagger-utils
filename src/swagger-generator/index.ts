@@ -14,15 +14,15 @@ export class SwaggerGenerator {
 
     constructor(settings: ISwaggerSetting) {
         this.setting = settings;
-        const { descriptorInfo, includePaths, excludedDirsFromPaths, host, basePath, schemes } = settings;
+        const { descriptorInfo, includePaths, excludedDirsFromPaths, host, basePath, schemes, swaggerVersion } = settings;
 
         const descriptionText = this.getDescriptionText();
 
         this.descriptor = {
-            basePath,
             host,
             schemes,
-            swagger: '2.0',
+            swagger: swaggerVersion ? swaggerVersion : '3.0',
+            basePath: basePath ? basePath : '/',
             info: { ...descriptorInfo, ...{ description: descriptionText } },
             paths: {},
             definitions: {},
