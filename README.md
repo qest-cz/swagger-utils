@@ -75,7 +75,7 @@ Swagger generator has configuration object with these properties:
 |descriptorInfo|```Object{ title:string; version:string; description:string; }```||Info object whitch title, version and base description
 |includePaths|string[]|`['./src']`|Paths of folders that will be recursively crawled to find the yamls
 |excludedDirsFromPaths|string[]||This paths will be excludet from crawling. but only this folders, not their subfolders
-|schemes|string[]||Swagger definition of schemes (http, https, ws, etc..). If it's not defined, scheme of UI will be taken in swagger UI
+|schemes|string[]||Swagger definition of schemes (http, https, ws, etc..). If it's not defined, scheme of UI will be taken in swagger UI. Only for Swagger 2.0
 |host|string||Swagger host of API. If it's not defined, host of UI will be taken in swagger UI
 |basePath|string||Swagger basepath of API
 |changeLogPath|string||If you have changelog txt file in your application, it can be included to description of API
