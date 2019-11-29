@@ -4,7 +4,7 @@
 - Add swagger UI to your backend for simple documentation reading
 
 ### Instalation
-Instal package to our dependencies from NPM.
+Install package to our dependencies from NPM.
 ```
 yarn add @qest/swagger-utils
 ```
