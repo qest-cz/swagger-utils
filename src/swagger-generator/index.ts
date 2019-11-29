@@ -2,10 +2,10 @@ import * as fs from 'fs';
 import * as yamlParser from 'js-yaml';
 import * as yamlFormatter from 'json-to-pretty-yaml';
 import * as path from 'path';
-import { IDescriptor, ISwaggerSetting } from '../interfaces';
+import { IDescriptor20, IDescriptor300, ISwaggerSetting } from '../interfaces';
 
 export class SwaggerGenerator {
-    private descriptor: IDescriptor;
+    private descriptor: IDescriptor20 | IDescriptor300;
 
     private includePaths: string[];
     private excludedDirsFromPaths: string[];
@@ -14,22 +14,13 @@ export class SwaggerGenerator {
 
     constructor(settings: ISwaggerSetting) {
         this.setting = settings;
-        const { descriptorInfo, includePaths, excludedDirsFromPaths, host, basePath, schemes, swaggerVersion } = settings;
+        const { includePaths, excludedDirsFromPaths, swaggerVersion } = settings;
 
-        const descriptionText = this.getDescriptionText();
-
-        this.descriptor = {
-            host,
-            schemes,
-            swagger: swaggerVersion ? swaggerVersion : '3.0',
-            basePath: basePath ? basePath : '/',
-            info: { ...descriptorInfo, ...{ description: descriptionText } },
-            paths: {},
-            definitions: {},
-            responses: {},
-            securityDefinitions: {},
-            tags: [],
-        };
+        if (swaggerVersion === '2.0') {
+            this.createDescriptor20();
+        } else {
+            this.createDescriptor300();
+        }
         this.includePaths = includePaths ? includePaths : ['./src'];
         this.excludedDirsFromPaths = excludedDirsFromPaths;
     }
@@ -79,7 +70,13 @@ export class SwaggerGenerator {
             this.addPathMethod(docFragment);
             fragmentExist = true;
         }
-        const definitionsFragments = ['definitions', 'responses', 'securityDefinitions'];
+        const definitionsFragments = [];
+        if (this.setting.swaggerVersion === '2.0') {
+            definitionsFragments.push(['definitions', 'responses', 'securityDefinitions', 'consumes', 'produces', 'security']);
+        } else {
+            definitionsFragments.push(['components', 'security']);
+        }
+
         for (const componentFragment of definitionsFragments) {
             if (docFragment[componentFragment]) {
                 this.descriptor[componentFragment] = {
@@ -133,7 +130,9 @@ export class SwaggerGenerator {
             this.parseYmlFile(file);
         });
         this.descriptor.paths = this.sortKeys(this.descriptor.paths);
-        this.descriptor.definitions = this.sortKeys(this.descriptor.definitions);
+        if ('definitions' in this.descriptor) {
+            this.descriptor.definitions = this.sortKeys(this.descriptor.definitions);
+        }
     }
 
     private sortKeys(object: { [key: string]: any }) {
@@ -141,5 +140,41 @@ export class SwaggerGenerator {
         const keys = Object.keys(object).sort();
         keys.forEach((key) => (obj[key] = object[key]));
         return obj;
+    }
+
+    private createDescriptor20() {
+        const { descriptorInfo, host, basePath, schemes, swaggerVersion } = this.setting;
+        this.descriptor = <IDescriptor20>{
+            host,
+            schemes,
+            swagger: swaggerVersion,
+            basePath: basePath ? basePath : '/',
+            info: { ...descriptorInfo, ...{ description: this.getDescriptionText() } },
+            paths: {},
+            definitions: {},
+            responses: {},
+            securityDefinitions: {},
+            security: [],
+            tags: [],
+            consumes: [],
+            produces: [],
+        };
+    }
+
+    private createDescriptor300() {
+        const { descriptorInfo, host, basePath, swaggerVersion } = this.setting;
+        this.descriptor = <IDescriptor300>{
+            swagger: swaggerVersion ? swaggerVersion : '3.0.0',
+            info: { ...descriptorInfo, ...{ description: this.getDescriptionText() } },
+            paths: {},
+            security: [],
+            components: [],
+            tags: [],
+            servers: [
+                {
+                    url: host + basePath ? basePath : '/',
+                },
+            ],
+        };
     }
 }
