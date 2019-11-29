@@ -1,12 +1,15 @@
 {
   "name": "@qest/swagger-utils",
   "version": "0.0.3",
-  "description": "",
+  "description": "Generate swagger data from splitted files, add swagger UI to our express, etc.",
   "scripts": {
     "prettier:run": "prettier --write \"src/**/*.ts\"",
     "prettier:check": "prettier -l \"src/**/*.ts\"",
     "tslint:run": "tslint --fix -c tslint.json -p .",
     "tslint": "tslint -c tslint.json -p .",
+    "tsc:check": "tsc --noEmit",
+    "code:fix": "yarn prettier:run && yarn tslint:run",
+    "code:check": "yarn prettier:check && yarn tslint && yarn tsc:check",
     "build": "rimraf dist && tsc"
   },
   "main": "dist/index.js",
@@ -19,10 +22,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "json-to-pretty-yaml": "^1.2.2"
+    "express": "^4.17.1",
+    "json-to-pretty-yaml": "^1.2.2",
+    "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.2",
     "@types/node": "^12.12.3",
+    "@types/swagger-ui-express": "^4.1.0",
     "prettier": "^1.13.5",
     "rimraf": "^2.6.3",
     "ts-node": "^5.0.1",
