@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as yamlParser from 'js-yaml';
 import * as yamlFormatter from 'json-to-pretty-yaml';
 import * as path from 'path';
-import { IDescriptor20, IDescriptor300, ISwaggerSetting } from '../interfaces';
+import { IDescriptor20, IDescriptor300, ISwaggerSetting, SwaggerVersions } from '../interfaces';
 
 export class SwaggerGenerator {
     private descriptor: IDescriptor20 | IDescriptor300;
@@ -16,7 +16,7 @@ export class SwaggerGenerator {
         this.setting = settings;
         const { includePaths, excludedDirsFromPaths, swaggerVersion } = settings;
 
-        if (swaggerVersion === '2.0') {
+        if (swaggerVersion === SwaggerVersions.TWO) {
             this.createDescriptor20();
         } else {
             this.createDescriptor300();

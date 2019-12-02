@@ -1,3 +1,8 @@
+export enum SwaggerVersions {
+    TWO = '2.0',
+    THREE = '3.0.0',
+}
+
 export interface IDescriptorInfo {
     title: string;
     version: string;
@@ -6,7 +11,7 @@ export interface IDescriptorInfo {
 }
 
 export interface IDescriptor20 {
-    swagger: '2.0';
+    swagger: SwaggerVersions.TWO;
     info: IDescriptorInfo;
     paths: Object;
     definitions: Object;
@@ -22,7 +27,7 @@ export interface IDescriptor20 {
 }
 
 export interface IDescriptor300 {
-    swagger: '3.0.0';
+    swagger: SwaggerVersions.THREE;
     info: IDescriptorInfo;
     paths: Object;
     components: Object;
@@ -39,5 +44,5 @@ export interface ISwaggerSetting {
     host?: string;
     basePath?: string;
     changeLogPath?: string;
-    swaggerVersion?: '2.0' | '3.0.0';
+    swaggerVersion?: SwaggerVersions;
 }
