@@ -71,10 +71,10 @@ export class SwaggerGenerator {
             fragmentExist = true;
         }
         const definitionsFragments = [];
-        if (this.setting.swaggerVersion === '2.0') {
-            definitionsFragments.push(['definitions', 'responses', 'securityDefinitions', 'consumes', 'produces', 'security']);
+        if (this.setting.swaggerVersion === SwaggerVersions.TWO) {
+            definitionsFragments.push('definitions', 'responses', 'securityDefinitions', 'consumes', 'produces', 'security');
         } else {
-            definitionsFragments.push(['components', 'security']);
+            definitionsFragments.push('components', 'security');
         }
 
         for (const componentFragment of definitionsFragments) {
