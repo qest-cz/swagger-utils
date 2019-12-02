@@ -1,6 +1,6 @@
 {
   "name": "@qest/swagger-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate swagger data from splitted files, add swagger UI to our express, etc.",
   "scripts": {
     "prettier:run": "prettier --write \"src/**/*.ts\"",
