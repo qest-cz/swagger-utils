@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import { SwaggerGenerator } from '../swagger-generator';
 
 export const swaggerDataMiddleware = (swaggerGenerator: SwaggerGenerator, asJson = true) => (
-    req: Request,
+    req,
     res: Response,
     next: NextFunction,
 ) => {

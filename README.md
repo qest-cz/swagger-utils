@@ -128,7 +128,7 @@ In project are express middlewares for integraion of documentation to our projec
 
 ```
 Router()
-    .use('/api/v1/swagger', swaggerDataMiddleware(swaggerGenerator))
+    .get('/api/v1/swagger', swaggerDataMiddleware(swaggerGenerator))
     .use('/swagger', swaggerUiMiddleware({
             swaggerOptions: {
                 url: '/api/v1/swagger',
