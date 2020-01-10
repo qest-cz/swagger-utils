@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as yamlParser from 'js-yaml';
 import * as yamlFormatter from 'json-to-pretty-yaml';
 import * as path from 'path';
+
 import { IDescriptor20, IDescriptor300, ISwaggerSetting, SwaggerVersions } from '../interfaces';
 
 export class SwaggerGenerator {
@@ -164,7 +165,7 @@ export class SwaggerGenerator {
     private createDescriptor300() {
         const { descriptorInfo, host, basePath, swaggerVersion } = this.setting;
         this.descriptor = <IDescriptor300>{
-            swagger: swaggerVersion ? swaggerVersion : '3.0.0',
+            openapi: swaggerVersion || '3.0.0',
             info: { ...descriptorInfo, ...{ description: this.getDescriptionText() } },
             paths: {},
             security: [],

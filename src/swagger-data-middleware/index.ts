@@ -1,11 +1,7 @@
 import { NextFunction, Response } from 'express';
 import { SwaggerGenerator } from '../swagger-generator';
 
-export const swaggerDataMiddleware = (swaggerGenerator: SwaggerGenerator, asJson = true) => (
-    req,
-    res: Response,
-    next: NextFunction,
-) => {
+export const swaggerDataMiddleware = (swaggerGenerator: SwaggerGenerator, asJson = true) => (req, res: Response, next: NextFunction) => {
     try {
         if (asJson) {
             res.status(200).json(swaggerGenerator.getAsObject());
