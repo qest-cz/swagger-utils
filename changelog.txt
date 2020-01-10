@@ -1,0 +1,3 @@
+# Change list
+---
+1.0.5 - fix descriptor for swager version 3.0.0
