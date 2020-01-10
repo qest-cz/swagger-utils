@@ -27,7 +27,7 @@ export interface IDescriptor20 {
 }
 
 export interface IDescriptor300 {
-    swagger: SwaggerVersions.THREE;
+    openapi: SwaggerVersions.THREE;
     info: IDescriptorInfo;
     paths: Object;
     components: Object;
