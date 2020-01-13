@@ -80,23 +80,21 @@ export class SwaggerGenerator {
 
         for (const componentFragment of definitionsFragments) {
             if (docFragment[componentFragment]) {
-                if (componentFragment === 'components') {
-                    this.descriptor[componentFragment] = {
-                        schemas: {
-                            ...this.descriptor[componentFragment].schemas,
-                            ...docFragment[componentFragment].schemas,
-                        },
-                        responses: {
-                            ...this.descriptor[componentFragment].responses,
-                            ...docFragment[componentFragment].responses,
-                        },
-                    };
-                } else {
-                    this.descriptor[componentFragment] = {
-                        ...this.descriptor[componentFragment],
-                        ...docFragment[componentFragment],
-                    };
-                }
+                const keys = componentFragment === 'components' ? Object.keys(this.descriptor[componentFragment]) : [];
+                this.descriptor[componentFragment] = {
+                    ...this.descriptor[componentFragment],
+                    ...docFragment[componentFragment],
+                    ...keys.reduce(
+                        (acc, currentKey) => ({
+                            ...acc,
+                            [currentKey]: {
+                                ...this.descriptor[componentFragment][currentKey],
+                                ...docFragment[componentFragment][currentKey],
+                            },
+                        }),
+                        {},
+                    ),
+                };
                 fragmentExist = true;
             }
         }
