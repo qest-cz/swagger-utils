@@ -80,9 +80,20 @@ export class SwaggerGenerator {
 
         for (const componentFragment of definitionsFragments) {
             if (docFragment[componentFragment]) {
+                const keys = componentFragment === 'components' ? Object.keys(docFragment[componentFragment]) : [];
                 this.descriptor[componentFragment] = {
                     ...this.descriptor[componentFragment],
                     ...docFragment[componentFragment],
+                    ...keys.reduce(
+                        (acc, currentKey) => ({
+                            ...acc,
+                            [currentKey]: {
+                                ...this.descriptor[componentFragment][currentKey],
+                                ...docFragment[componentFragment][currentKey],
+                            },
+                        }),
+                        {},
+                    ),
                 };
                 fragmentExist = true;
             }
