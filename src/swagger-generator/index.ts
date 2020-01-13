@@ -80,7 +80,7 @@ export class SwaggerGenerator {
 
         for (const componentFragment of definitionsFragments) {
             if (docFragment[componentFragment]) {
-                const keys = componentFragment === 'components' ? Object.keys(this.descriptor[componentFragment]) : [];
+                const keys = componentFragment === 'components' ? Object.keys(docFragment[componentFragment]) : [];
                 this.descriptor[componentFragment] = {
                     ...this.descriptor[componentFragment],
                     ...docFragment[componentFragment],
