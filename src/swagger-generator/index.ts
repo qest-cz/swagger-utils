@@ -80,16 +80,22 @@ export class SwaggerGenerator {
 
         for (const componentFragment of definitionsFragments) {
             if (docFragment[componentFragment]) {
-                if (this.descriptor[componentFragment].hasOwnProperty('schemas')) {
-                    this.descriptor[componentFragment].schemas = Object.assign(
-                        this.descriptor[componentFragment].schemas,
-                        docFragment[componentFragment].schemas,
-                    );
+                if (componentFragment === 'components') {
+                    this.descriptor[componentFragment] = {
+                        schemas: {
+                            ...this.descriptor[componentFragment].schemas,
+                            ...docFragment[componentFragment].schemas,
+                        },
+                        responses: {
+                            ...this.descriptor[componentFragment].responses,
+                            ...docFragment[componentFragment].responses,
+                        },
+                    };
                 } else {
-                    this.descriptor[componentFragment] = Object.assign(
-                        Object.assign({}, this.descriptor[componentFragment]),
-                        docFragment[componentFragment],
-                    );
+                    this.descriptor[componentFragment] = {
+                        ...this.descriptor[componentFragment],
+                        ...docFragment[componentFragment],
+                    };
                 }
                 fragmentExist = true;
             }
