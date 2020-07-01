@@ -3,7 +3,7 @@
 - Do better documentation of API with with clearly arranged yaml files instead of one big file 
 - Add swagger UI to your backend for simple documentation reading
 
-### Instalation
+### Installation
 Install package to our dependencies from NPM.
 ```
 yarn add @qest/swagger-utils
@@ -18,7 +18,10 @@ It generates swagger yaml or json from partials yaml files which is merged toget
 
 Yamls has parts of swagger yaml. You can separate routes, responses, object definitions and security definitions.
 
-This is example for file with some route
+###Examples
+
+####Swagger version `V2.0`
+
 ```
 paths:
   /API/v1/swagger:
@@ -64,6 +67,54 @@ definitions:
         type: string                
       name:
         type: string        
+```
+
+####Swagger Version `V3.0`
+
+```
+paths:
+  /API/v1/swagger:
+    get:
+      description: get swagger documentation of project in raw (string) format
+      responses:
+        200:
+          description: documentation of project in raw (string) format
+          content:
+            text/plain
+```
+...other can be like this
+```
+paths:
+  /API/v1/something/{id}
+    get:
+      responses:
+        200:
+          $ref: '#/components/responses/somethingResponse'
+    delete:
+      responses:
+        200:
+          description: delete something      
+
+```
+...and file with responses and object can be together.
+```
+components:
+  responses:
+    somethingResponse:
+      description: this is response with some object
+      content:
+        application/json:
+          schema:
+            $ref: #/components/schemas/Item            
+  
+  schemas:            
+    Item:
+      type: object
+      properties:
+        id:
+          type: string                
+        name:
+          type: string 
 ```
 
 ### How to configure and use generator 
