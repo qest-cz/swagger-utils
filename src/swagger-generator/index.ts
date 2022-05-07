@@ -4,6 +4,7 @@ import * as yamlFormatter from 'json-to-pretty-yaml';
 import * as path from 'path';
 
 import { IDescriptor20, IDescriptor300, ISwaggerSetting, SwaggerVersions } from '../interfaces';
+import { isDocFragmentExists } from './utils';
 
 export class SwaggerGenerator {
     private descriptor: IDescriptor20 | IDescriptor300;
@@ -62,10 +63,11 @@ export class SwaggerGenerator {
         }
     }
 
-    private completeDocFragment(docFragment: { paths: string[] }) {
-        if (!docFragment) {
+    private completeDocFragment(docFragment: unknown) {
+        if (!isDocFragmentExists(docFragment)) {
             return;
         }
+
         let fragmentExist = false;
         if (docFragment.paths) {
             this.addPathMethod(docFragment);
@@ -105,7 +107,7 @@ export class SwaggerGenerator {
 
     private parseYmlFile(file: string) {
         const resource = fs.readFileSync(path.resolve(process.cwd(), file)).toString();
-        const docFragments = yamlParser.safeLoadAll(resource);
+        const docFragments = yamlParser.loadAll(resource);
 
         for (const fragment of docFragments) {
             this.completeDocFragment(fragment);
