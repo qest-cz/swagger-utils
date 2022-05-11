@@ -6,7 +6,7 @@ trigger:
       - master
   tags:
     include:
-      - *
+      - v*
 steps:
   - task: NodeTool@0
     displayName: 'Use Node 10.x'
