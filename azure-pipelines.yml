@@ -1,11 +1,12 @@
 pool:
   name: Qest Linux
-trigger:
-  include:
-   - master
+trigger: 
+  branches:
+    include: 
+      - master
   tags:
     include:
-     - *
+      - *
 steps:
   - task: NodeTool@0
     displayName: 'Use Node 10.x'
